@@ -294,7 +294,7 @@ fixtures = [
     {
 		"doctype": "Notification",
 		"filters": [
-			["module", "=", "Globcom Contract Review"]
+			["name", "in", ["Contract Review Record Reminder", "Contract Review Notification"]]
 		]
 	}
 ]
