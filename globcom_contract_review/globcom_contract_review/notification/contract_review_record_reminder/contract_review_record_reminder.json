@@ -1,0 +1,67 @@
+{
+ "attach_files": "",
+ "attach_print": 0,
+ "channel": "Email",
+ "condition": "",
+ "creation": "2026-01-24 10:18:24.474133",
+ "date_changed": "date",
+ "days_in_advance": 1,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Contract Review Record",
+ "enabled": 1,
+ "event": "Days After",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<h3>Dear All,</h3>\n\n<h4>\n    Kindly reminder to review the following Contract Review Record:\n</h4>\n\n<p>\n    <a href=\"{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}\">\n    {{doc.name}}\n    </a>\n</p>\n\n<h4>Best Regards</h4>\n",
+ "message_type": "Markdown",
+ "modified": "2026-01-24 11:06:58.088751",
+ "modified_by": "Administrator",
+ "module": "Globcom Contract Review",
+ "name": "Contract Review Record Reminder",
+ "owner": "Administrator",
+ "property_value": "",
+ "recipients": [
+  {
+   "condition": "doc.review_status != \"Approved\"",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Sales Review"
+  },
+  {
+   "condition": "doc.review_status_design != \"Approved\"",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Manufacturing Review"
+  },
+  {
+   "condition": "doc.review_status_operations != \"Approved\"",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Operation Review"
+  },
+  {
+   "condition": "doc.review_status_quality != \"Approved\"",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Quality Review"
+  },
+  {
+   "condition": "doc.review_status_purchase != \"Approved\"",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Purchase Review"
+  },
+  {
+   "condition": "doc.review_status_finance != \"Approved\"",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Finance Review"
+  },
+  {
+   "condition": "doc.review_status_hse != \"Approved\"",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "HSE Review"
+  }
+ ],
+ "send_system_notification": 1,
+ "send_to_all_assignees": 0,
+ "sender": "",
+ "sender_email": "",
+ "set_property_after_alert": "",
+ "subject": "Reminder: Contract Review Record"
+}

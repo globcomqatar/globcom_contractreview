@@ -43,6 +43,10 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
+doctype_js = {
+	"Quotation": "public/js/quotation.js",
+	"Sales Order": "public/js/sales_order.js"
+}
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -181,6 +185,13 @@ app_license = "mit"
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
+
+override_doctype_dashboards = {
+	"Sales Order": "globcom_contract_review.dashboard_overrides.get_sales_order_dashboard",
+	"Quotation": "globcom_contract_review.dashboard_overrides.get_quotation_dashboard"
+}
+
+
 # override_doctype_dashboards = {
 # 	"Task": "globcom_contract_review.task.get_dashboard_data"
 # }
@@ -193,6 +204,7 @@ app_license = "mit"
 # -----------------------------------------------------------
 
 # ignore_links_on_delete = ["Communication", "ToDo"]
+
 
 # Request Events
 # ----------------
@@ -246,4 +258,43 @@ app_license = "mit"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-
+fixtures = [
+	{
+		"doctype": "Role",
+		"filters": [
+			["name", "in", [
+				"Quality Review",
+				"Operation Review",
+				"Manufacturing Review",
+				"Sales Review",
+				"Purchase Review",
+				"Finance Review",
+				"HSE Review"
+			]]
+		]
+	},
+	{
+		"doctype": "Client Script",
+		"filters": [
+			["module", "=", "Globcom Contract Review"]
+		]
+	},
+	{
+		"doctype": "Custom Field",
+		"filters": [
+			["module", "=", "Globcom Contract Review"]
+		]
+	},
+	{
+		"doctype": "Property Setter",
+		"filters": [
+			["module", "=", "Globcom Contract Review"]
+		]
+	},
+    {
+		"doctype": "Notification",
+		"filters": [
+			["module", "=", "Globcom Contract Review"]
+		]
+	}
+]

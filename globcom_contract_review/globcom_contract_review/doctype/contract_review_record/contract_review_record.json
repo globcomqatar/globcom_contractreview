@@ -1,0 +1,707 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-01-19 19:33:55.019462",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "customer",
+  "addresss",
+  "inquiry_no",
+  "project_reference",
+  "inquiry_no_so",
+  "project_reference_so",
+  "column_break_orec",
+  "date",
+  "quotation",
+  "sales_order",
+  "review_of_customers_request__tender_document",
+  "review_of_customers_purchase_order__contract",
+  "notify_all_departments",
+  "amended_from",
+  "section_break_jaev",
+  "scope_of_work",
+  "item_description_section",
+  "item_details",
+  "sales_and_marketing_section",
+  "reviewed_by",
+  "name1",
+  "designation",
+  "remarks",
+  "column_break_kfwz",
+  "date_sales",
+  "review_status",
+  "sign",
+  "section_break_oowa",
+  "reviewed_by_design",
+  "name_design",
+  "designation_design",
+  "remarks_design",
+  "column_break_irmg",
+  "date_design",
+  "approval_status_design",
+  "sign_design",
+  "operations_section",
+  "reviewed_by_operations",
+  "name_operations",
+  "designation_operations",
+  "remarks_operations",
+  "column_break_uqnh",
+  "date_operations",
+  "review_status_operations",
+  "sign_operations",
+  "quality_section",
+  "reviewed_by_quality",
+  "name_quality",
+  "designation_quality",
+  "remarks_quality",
+  "column_break_sqme",
+  "date_quality",
+  "approval_status_quality",
+  "sign_quality",
+  "purchase_section",
+  "reviewed_by_purchase",
+  "name_purchase",
+  "designation_purchase",
+  "remarks_purchase",
+  "column_break_vchf",
+  "date_purchase",
+  "approval_status_purchase",
+  "sign_purchase",
+  "finance_section",
+  "reviewed_by_finance",
+  "name_finance",
+  "designation__finance",
+  "remarks_finance",
+  "column_break_qdxd",
+  "date_finance",
+  "approval_status_finance",
+  "sign_finance",
+  "hse_health_and_safety_environment_section",
+  "reviewed_by_hse",
+  "name_hse",
+  "designation_hse",
+  "remarks_hse",
+  "column_break_memq",
+  "date_hse",
+  "approval_status_hse",
+  "sign_hse",
+  "connections_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "CRR-.MM.-.YYYY.-.####."
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "addresss",
+   "fieldtype": "Link",
+   "label": "Addresss",
+   "options": "Address",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "quotation.custom_quote_inquiry_no",
+   "fieldname": "inquiry_no",
+   "fieldtype": "Data",
+   "label": "Inquiry No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "quotation.custom_quote_project_reference",
+   "fieldname": "project_reference",
+   "fieldtype": "Data",
+   "label": "Project Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "inquiry_no_so",
+   "fieldtype": "Data",
+   "label": "Inquiry No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project_reference_so",
+   "fieldtype": "Data",
+   "label": "Project Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_orec",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "Quotation",
+   "options": "Quotation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "review_of_customers_request__tender_document",
+   "fieldtype": "Check",
+   "label": "Review of Customer's Request / Tender Document"
+  },
+  {
+   "default": "0",
+   "fieldname": "review_of_customers_purchase_order__contract",
+   "fieldtype": "Check",
+   "label": "Review of Customer's Purchase Order / Contract"
+  },
+  {
+   "default": "0",
+   "fieldname": "notify_all_departments",
+   "fieldtype": "Check",
+   "label": "Notify all Departments"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Contract Review Record",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_jaev",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "scope_of_work",
+   "fieldtype": "Text Editor",
+   "label": "Scope of Work",
+   "read_only_depends_on": "eval:doc.owner!=frappe.session.user"
+  },
+  {
+   "fieldname": "item_description_section",
+   "fieldtype": "Section Break",
+   "label": "Item Description"
+  },
+  {
+   "fieldname": "item_details",
+   "fieldtype": "Table",
+   "label": "Item Details",
+   "options": "Quotation Item"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.reviewed_by",
+   "fieldname": "sales_and_marketing_section",
+   "fieldtype": "Section Break",
+   "label": "Sales and Marketing Department"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fetch_from": "reviewed_by.full_name",
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_kfwz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_sales",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending Review",
+   "fieldname": "review_status",
+   "fieldtype": "Select",
+   "label": "Review Status",
+   "options": "\nPending Review\nApproved\nRejected\nMore Information"
+  },
+  {
+   "fieldname": "sign",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.reviewed_by_design",
+   "fieldname": "section_break_oowa",
+   "fieldtype": "Section Break",
+   "label": "Design and Engineering Department"
+  },
+  {
+   "fieldname": "reviewed_by_design",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fetch_from": "reviewed_by_design.full_name",
+   "fieldname": "name_design",
+   "fieldtype": "Data",
+   "label": "Name ",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation_design",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks_design",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_irmg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_design",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending Review",
+   "fieldname": "approval_status_design",
+   "fieldtype": "Select",
+   "label": "Review Status",
+   "options": "\nPending Review\nApproved\nRejected\nMore Information"
+  },
+  {
+   "fieldname": "sign_design",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.reviewed_by_operations",
+   "fieldname": "operations_section",
+   "fieldtype": "Section Break",
+   "label": "Operations Department"
+  },
+  {
+   "fieldname": "reviewed_by_operations",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fetch_from": "reviewed_by_operations.full_name",
+   "fieldname": "name_operations",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation_operations",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks_operations",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_uqnh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_operations",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending Review",
+   "fieldname": "review_status_operations",
+   "fieldtype": "Select",
+   "label": "Review Status",
+   "options": "\nPending Review\nApproved\nRejected\nMore Information"
+  },
+  {
+   "fieldname": "sign_operations",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.reviewed_by_quality",
+   "fieldname": "quality_section",
+   "fieldtype": "Section Break",
+   "label": "Quality Department"
+  },
+  {
+   "fieldname": "reviewed_by_quality",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fetch_from": "reviewed_by_quality.full_name",
+   "fieldname": "name_quality",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation_quality",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks_quality",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_sqme",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_quality",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending Review",
+   "fieldname": "approval_status_quality",
+   "fieldtype": "Select",
+   "label": "Review Status",
+   "options": "\nPending Review\nApproved\nRejected\nMore Information"
+  },
+  {
+   "fieldname": "sign_quality",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "doc.reviewed_by_purchase",
+   "fieldname": "purchase_section",
+   "fieldtype": "Section Break",
+   "label": "Purchase Department"
+  },
+  {
+   "fieldname": "reviewed_by_purchase",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fetch_from": "reviewed_by_purchase.full_name",
+   "fieldname": "name_purchase",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation_purchase",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks_purchase",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_vchf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_purchase",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending Review",
+   "fieldname": "approval_status_purchase",
+   "fieldtype": "Select",
+   "label": "Review Status",
+   "options": "\nPending Review\nApproved\nRejected\nMore Information"
+  },
+  {
+   "fieldname": "sign_purchase",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.reviewed_by_finance",
+   "fieldname": "finance_section",
+   "fieldtype": "Section Break",
+   "label": "Finance Department"
+  },
+  {
+   "fieldname": "reviewed_by_finance",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fetch_from": "reviewed_by_finance.full_name",
+   "fieldname": "name_finance",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation__finance",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks_finance",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_qdxd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_finance",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending Review",
+   "fieldname": "approval_status_finance",
+   "fieldtype": "Select",
+   "label": "Review Status",
+   "options": "\nPending Review\nApproved\nRejected\nMore Information"
+  },
+  {
+   "fieldname": "sign_finance",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.reviewed_by_hse",
+   "fieldname": "hse_health_and_safety_environment_section",
+   "fieldtype": "Section Break",
+   "label": "HSE Health and Safety Environment Department"
+  },
+  {
+   "fieldname": "reviewed_by_hse",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fetch_from": "reviewed_by_hse.full_name",
+   "fieldname": "name_hse",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation_hse",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks_hse",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_memq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_hse",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Pending Review",
+   "fieldname": "approval_status_hse",
+   "fieldtype": "Select",
+   "label": "Review Status",
+   "options": "\nPending Review\nApproved\nRejected\nMore Information"
+  },
+  {
+   "fieldname": "sign_hse",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Reference Documents",
+   "link_doctype": "Sales Order",
+   "link_fieldname": "custom_contract_review_record"
+  },
+  {
+   "group": "Reference Documents",
+   "link_doctype": "Quotation",
+   "link_fieldname": "custom_contract_review_record"
+  }
+ ],
+ "modified": "2026-01-24 11:05:53.479439",
+ "modified_by": "Administrator",
+ "module": "Globcom Contract Review",
+ "name": "Contract Review Record",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Review",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Finance Review",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HSE Review",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing Review",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operation Review",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase Review",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Quality Review",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_views": 1
+}

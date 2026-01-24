@@ -1,0 +1,93 @@
+[
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-01-22 09:45:57.493800",
+  "name": "HSE Review",
+  "restrict_to_domain": null,
+  "role_name": "HSE Review",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-01-22 09:46:28.865856",
+  "name": "Finance Review",
+  "restrict_to_domain": null,
+  "role_name": "Finance Review",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-01-22 09:46:48.858447",
+  "name": "Purchase Review",
+  "restrict_to_domain": null,
+  "role_name": "Purchase Review",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-01-22 13:08:39.463147",
+  "name": "Sales Review",
+  "restrict_to_domain": null,
+  "role_name": "Sales Review",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-01-22 13:09:13.081150",
+  "name": "Manufacturing Review",
+  "restrict_to_domain": null,
+  "role_name": "Manufacturing Review",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-01-22 13:09:24.921032",
+  "name": "Operation Review",
+  "restrict_to_domain": null,
+  "role_name": "Operation Review",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-01-22 13:09:33.768552",
+  "name": "Quality Review",
+  "restrict_to_domain": null,
+  "role_name": "Quality Review",
+  "two_factor_auth": 0
+ }
+]

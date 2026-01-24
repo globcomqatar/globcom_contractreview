@@ -1,0 +1,61 @@
+{
+ "attach_files": "",
+ "attach_print": 0,
+ "channel": "Email",
+ "condition": "doc.notify_all_departments == 1",
+ "creation": "2026-01-24 10:15:32.673169",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Contract Review Record",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<h3>Dear All,</h3>\n\n<h4>\n    Kindly review the following Contract Review Record:\n</h4>\n\n<p>\n    <a href=\"{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}\">\n    {{doc.name}}\n    </a>\n</p>\n\n<h4>Best Regards</h4>\n",
+ "message_type": "HTML",
+ "modified": "2026-01-24 11:06:54.493329",
+ "modified_by": "Administrator",
+ "module": "Globcom Contract Review",
+ "name": "Contract Review Notification",
+ "owner": "Administrator",
+ "property_value": "",
+ "recipients": [
+  {
+   "condition": "",
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Sales Review"
+  },
+  {
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Manufacturing Review"
+  },
+  {
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Operation Review"
+  },
+  {
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Quality Review"
+  },
+  {
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Purchase Review"
+  },
+  {
+   "receiver_by_document_field": "",
+   "receiver_by_role": "Finance Review"
+  },
+  {
+   "receiver_by_document_field": "",
+   "receiver_by_role": "HSE Review"
+  }
+ ],
+ "send_system_notification": 1,
+ "send_to_all_assignees": 0,
+ "sender": "",
+ "sender_email": "",
+ "set_property_after_alert": "",
+ "subject": "Review Pending for Contract Review Record",
+ "value_changed": "notify_all_departments"
+}
