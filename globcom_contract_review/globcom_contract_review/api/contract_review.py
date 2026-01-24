@@ -60,17 +60,9 @@ def create_contract_review_from_source(source_doctype, source_name):
 		contract_review.customer = source_doc.customer if hasattr(source_doc, 'customer') else None
 		contract_review.customer_name = source_doc.customer_name if hasattr(source_doc, 'customer_name') else None
 
-	# Map address field - check common field names
-	address_field = None
-	if hasattr(source_doc, 'customer_address'):
-		address_field = source_doc.customer_address
-	elif hasattr(source_doc, 'address_display'):
-		address_field = source_doc.customer_address
-	elif hasattr(source_doc, 'shipping_address_name'):
-		address_field = source_doc.shipping_address_name
-
-	if address_field:
-		contract_review.addresss = address_field
+	# Map address display from Quotation or Sales Order
+	if hasattr(source_doc, 'address_display') and source_doc.address_display:
+		contract_review.addresss = source_doc.address_display
 
 	# Set source reference link
 	if source_doctype == 'Quotation':
@@ -102,22 +94,6 @@ def create_contract_review_from_source(source_doctype, source_name):
 	try:
 		contract_review.insert(ignore_permissions=False)
 		frappe.db.commit()
-
-		# Update the source document with backlink to Contract Review Record
-		# This enables bidirectional dashboard links
-		link_field = 'custom_contract_review_record'  # Assumes you added this field via Customize Form
-
-		try:
-			source_doc.reload()  # Reload to get latest data
-			source_doc.db_set(link_field, contract_review.name, update_modified=False)
-			frappe.db.commit()
-		except Exception as link_error:
-			# Log error but don't fail the whole operation
-			# The Contract Review Record is already created successfully
-			frappe.log_error(
-				message=f'Failed to set backlink in {source_doctype}: {str(link_error)}',
-				title=_('Contract Review Backlink Failed')
-			)
 
 	except Exception as e:
 		frappe.log_error(message=str(e), title=_('Contract Review Creation Failed'))

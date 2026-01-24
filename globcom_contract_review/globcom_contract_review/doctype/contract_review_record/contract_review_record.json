@@ -106,7 +106,7 @@
   },
   {
    "fieldname": "addresss",
-   "fieldtype": "Link",
+   "fieldtype": "Small Text",
    "label": "Addresss",
    "options": "Address",
    "read_only": 1
@@ -591,19 +591,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "group": "Reference Documents",
-   "link_doctype": "Sales Order",
-   "link_fieldname": "custom_contract_review_record"
-  },
-  {
-   "group": "Reference Documents",
-   "link_doctype": "Quotation",
-   "link_fieldname": "custom_contract_review_record"
-  }
- ],
- "modified": "2026-01-24 11:05:53.479439",
+ "links": [],
+ "modified": "2026-01-24 14:43:25.484197",
  "modified_by": "Administrator",
  "module": "Globcom Contract Review",
  "name": "Contract Review Record",
