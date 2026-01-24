@@ -53,6 +53,8 @@ frappe.ui.form.on('Contract Review Record', {
 		set_reviewer_filters(frm);
 		// Set department permissions
 		set_department_permissions(frm);
+		// Auto-fill current user in editable reviewer fields
+		auto_fill_current_user_reviewers(frm);
 	},
 
 	onload: function(frm) {
@@ -60,6 +62,8 @@ frappe.ui.form.on('Contract Review Record', {
 		set_reviewer_filters(frm);
 		// Set department permissions
 		set_department_permissions(frm);
+		// Auto-fill current user in editable reviewer fields
+		auto_fill_current_user_reviewers(frm);
 	},
 
 	customer: function(frm) {
@@ -110,7 +114,8 @@ function set_reviewer_filters(frm) {
 			return {
 				query: 'frappe.core.doctype.user.user.user_query',
 				filters: {
-					'role': dept.role
+					'role': dept.role,
+					'name': frappe.session.user  // Only show current user
 				}
 			};
 		});
@@ -142,6 +147,22 @@ function fetch_employee_designation(frm, user_field, designation_field) {
 				frm.set_value(designation_field, '');
 			}
 		});
+}
+
+// Helper function to auto-fill current user in reviewer fields based on permissions
+function auto_fill_current_user_reviewers(frm) {
+	// Only auto-fill for new documents or documents without reviewers set
+	Object.values(DEPARTMENT_CONFIG).forEach(dept => {
+		// Check if user has the required role for this department
+		// Exclude System Managers - they can manually select themselves if needed
+		if (frappe.user.has_role(dept.role) && !frappe.user.has_role('System Manager')) {
+			// Only set if field is empty (don't overwrite existing values)
+			if (!frm.doc[dept.reviewer_field]) {
+				frm.set_value(dept.reviewer_field, frappe.session.user);
+				// Designation will auto-fetch via existing field handler
+			}
+		}
+	});
 }
 
 // Helper function to set department-based permissions
