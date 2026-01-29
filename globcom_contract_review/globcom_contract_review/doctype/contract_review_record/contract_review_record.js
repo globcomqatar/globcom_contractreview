@@ -7,42 +7,56 @@ const DEPARTMENT_CONFIG = {
 		section: 'sales_and_marketing_section',
 		reviewer_field: 'reviewed_by',
 		designation_field: 'designation',
+		signature_field: 'sign_attach',
+		status_field: 'review_status',
 		role: 'Sales Review'
 	},
 	design: {
 		section: 'section_break_oowa',
 		reviewer_field: 'reviewed_by_design',
 		designation_field: 'designation_design',
+		signature_field: 'sign_design_attach',
+		status_field: 'approval_status_design',
 		role: 'Manufacturing Review'
 	},
 	operations: {
 		section: 'operations_section',
 		reviewer_field: 'reviewed_by_operations',
 		designation_field: 'designation_operations',
+		signature_field: 'sign_operations_attach',
+		status_field: 'review_status_operations',
 		role: 'Operation Review'
 	},
 	quality: {
 		section: 'quality_section',
 		reviewer_field: 'reviewed_by_quality',
 		designation_field: 'designation_quality',
+		signature_field: 'sign_quality_attach',
+		status_field: 'approval_status_quality',
 		role: 'Quality Review'
 	},
 	purchase: {
 		section: 'purchase_section',
 		reviewer_field: 'reviewed_by_purchase',
 		designation_field: 'designation_purchase',
+		signature_field: 'sign_purchase_attach',
+		status_field: 'approval_status_purchase',
 		role: 'Purchase Review'
 	},
 	finance: {
 		section: 'finance_section',
 		reviewer_field: 'reviewed_by_finance',
 		designation_field: 'designation__finance',
+		signature_field: 'sign_finance_attach',
+		status_field: 'approval_status_finance',
 		role: 'Finance Review'
 	},
 	hse: {
 		section: 'hse_health_and_safety_environment_section',
 		reviewer_field: 'reviewed_by_hse',
 		designation_field: 'designation_hse',
+		signature_field: 'sign_hse_attach',
+		status_field: 'approval_status_hse',
 		role: 'HSE Review'
 	}
 };
@@ -77,11 +91,26 @@ frappe.ui.form.on('Contract Review Record', {
 	}
 });
 
-// Dynamically create reviewer field handlers from config
+// Dynamically create reviewer field handlers from config (only fetch designation)
 Object.values(DEPARTMENT_CONFIG).forEach(dept => {
 	frappe.ui.form.on('Contract Review Record', {
 		[dept.reviewer_field]: function(frm) {
 			fetch_employee_designation(frm, dept.reviewer_field, dept.designation_field);
+		}
+	});
+});
+
+// Dynamically create status field handlers (fetch signature when Approved)
+Object.values(DEPARTMENT_CONFIG).forEach(dept => {
+	frappe.ui.form.on('Contract Review Record', {
+		[dept.status_field]: function(frm) {
+			// Only fetch signature when status is "Approved"
+			if (frm.doc[dept.status_field] === 'Approved') {
+				fetch_employee_signature(frm, dept.reviewer_field, dept.signature_field);
+			} else {
+				// Clear signature if status is not Approved
+				frm.set_value(dept.signature_field, '');
+			}
 		}
 	});
 });
@@ -143,8 +172,29 @@ function fetch_employee_designation(frm, user_field, designation_field) {
 			if (r.message && r.message.designation) {
 				frm.set_value(designation_field, r.message.designation);
 			} else {
-				// No employee found or no designation set
 				frm.set_value(designation_field, '');
+			}
+		});
+}
+
+// Helper function to fetch employee signature from User's employee record
+function fetch_employee_signature(frm, user_field, signature_field) {
+	let user_id = frm.doc[user_field];
+
+	if (!user_id) {
+		// Clear signature if no user
+		frm.set_value(signature_field, '');
+		return;
+	}
+
+	// Fetch Employee record where user_id matches
+	frappe.db.get_value('Employee', {user_id: user_id}, 'custom_attach_sign_image')
+		.then(r => {
+			if (r.message && r.message.custom_attach_sign_image) {
+				frm.set_value(signature_field, r.message.custom_attach_sign_image);
+			} else {
+				// No signature found - clear field
+				frm.set_value(signature_field, '');
 			}
 		});
 }
