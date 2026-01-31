@@ -224,12 +224,16 @@ function render_signature_html(frm, signature_field, image_url) {
 		return;
 	}
 
-	// Generate HTML with signature on a line (Frappe-style gray background)
-	// Border is now handled by CSS in contract_review_signatures.css
+	// Generate HTML with professional signature display - FIXED SIZE with !important
 	let signature_html = `
-		<div style="background-color: #f9f9f9; border: 1px solid #d1d8dd; border-radius: 4px; padding: 20px; margin: 10px 0;">
+		<div style="background-color: #f9f9f9; padding: 30px 20px; margin: 10px 0;">
 			<div style="text-align: center;">
-				<img src="${image_url}" alt="Signature" />
+				<img src="${image_url}"
+					 alt="Signature"
+					 style="width: 350px !important; height: 150px !important; display: block !important; margin: 0 auto 10px auto !important; object-fit: contain !important;" />
+				<div style="border-top: 2px solid #333; width: 400px; margin: 0 auto; padding-top: 8px;">
+					<strong style="font-size: 13px; color: #555; text-transform: uppercase;">Signature</strong>
+				</div>
 			</div>
 		</div>
 	`;
