@@ -69,6 +69,18 @@ frappe.ui.form.on('Contract Review Record', {
 		set_department_permissions(frm);
 		// Auto-fill current user in editable reviewer fields
 		auto_fill_current_user_reviewers(frm);
+		// Render existing signatures for approved departments
+		render_all_signatures(frm);
+
+		// Add "Notify All Department" button
+		if (!frm.doc.__islocal && !frm.doc.notify_all_departments) {
+			frm.add_custom_button(__('Notify All Department'), function() {
+				// Set notify_all_departments checkbox to checked
+				frm.set_value('notify_all_departments', 1);
+				// Save the document
+				frm.save();
+			});
+		}
 	},
 
 	onload: function(frm) {
@@ -78,6 +90,8 @@ frappe.ui.form.on('Contract Review Record', {
 		set_department_permissions(frm);
 		// Auto-fill current user in editable reviewer fields
 		auto_fill_current_user_reviewers(frm);
+		// Render existing signatures for approved departments
+		render_all_signatures(frm);
 	},
 
 	customer: function(frm) {
@@ -100,16 +114,19 @@ Object.values(DEPARTMENT_CONFIG).forEach(dept => {
 	});
 });
 
-// Dynamically create status field handlers (fetch signature when Approved)
+// Dynamically create status field handlers (fetch signature when Approved or Rejected)
 Object.values(DEPARTMENT_CONFIG).forEach(dept => {
 	frappe.ui.form.on('Contract Review Record', {
 		[dept.status_field]: function(frm) {
-			// Only fetch signature when status is "Approved"
-			if (frm.doc[dept.status_field] === 'Approved') {
-				fetch_employee_signature(frm, dept.reviewer_field, dept.signature_field);
+			// Get HTML field name (remove '_attach' from signature_field)
+			let html_field = dept.signature_field.replace('_attach', '');
+
+			// Only fetch signature when status is "Approved" or "Rejected"
+			if (frm.doc[dept.status_field] === 'Approved' || frm.doc[dept.status_field] === 'Rejected') {
+				fetch_employee_signature(frm, dept.reviewer_field, html_field);
 			} else {
-				// Clear signature if status is not Approved
-				frm.set_value(dept.signature_field, '');
+				// Clear signature if status is not Approved or Rejected
+				clear_signature_html(frm, html_field);
 			}
 		}
 	});
@@ -183,7 +200,7 @@ function fetch_employee_signature(frm, user_field, signature_field) {
 
 	if (!user_id) {
 		// Clear signature if no user
-		frm.set_value(signature_field, '');
+		clear_signature_html(frm, signature_field);
 		return;
 	}
 
@@ -191,12 +208,43 @@ function fetch_employee_signature(frm, user_field, signature_field) {
 	frappe.db.get_value('Employee', {user_id: user_id}, 'custom_attach_sign_image')
 		.then(r => {
 			if (r.message && r.message.custom_attach_sign_image) {
-				frm.set_value(signature_field, r.message.custom_attach_sign_image);
+				// Render signature with custom HTML (image on signature line)
+				render_signature_html(frm, signature_field, r.message.custom_attach_sign_image);
 			} else {
 				// No signature found - clear field
-				frm.set_value(signature_field, '');
+				clear_signature_html(frm, signature_field);
 			}
 		});
+}
+
+// Helper function to render signature HTML with image on signature line
+function render_signature_html(frm, signature_field, image_url) {
+	if (!image_url) {
+		clear_signature_html(frm, signature_field);
+		return;
+	}
+
+	// Generate HTML with signature on a line (Frappe-style gray background)
+	// Border is now handled by CSS in contract_review_signatures.css
+	let signature_html = `
+		<div style="background-color: #f9f9f9; border: 1px solid #d1d8dd; border-radius: 4px; padding: 20px; margin: 10px 0;">
+			<div style="text-align: center;">
+				<img src="${image_url}" alt="Signature" />
+			</div>
+		</div>
+	`;
+
+	// Render HTML to the field
+	if (frm.fields_dict[signature_field] && frm.fields_dict[signature_field].$wrapper) {
+		frm.fields_dict[signature_field].$wrapper.html(signature_html);
+	}
+}
+
+// Helper function to clear signature HTML
+function clear_signature_html(frm, signature_field) {
+	if (frm.fields_dict[signature_field] && frm.fields_dict[signature_field].$wrapper) {
+		frm.fields_dict[signature_field].$wrapper.html('');
+	}
 }
 
 // Helper function to auto-fill current user in reviewer fields based on permissions
@@ -258,4 +306,19 @@ function set_department_permissions(frm) {
 			frm.set_df_property(field.df.fieldname, 'read_only', !can_edit);
 		}
 	}
+}
+
+// Helper function to render all existing signatures on form load
+function render_all_signatures(frm) {
+	// Iterate through all departments and render signatures if approved or rejected
+	Object.values(DEPARTMENT_CONFIG).forEach(dept => {
+		// Check if department has been reviewed and approved/rejected
+		let status = frm.doc[dept.status_field];
+		if ((status === 'Approved' || status === 'Rejected') && frm.doc[dept.reviewer_field]) {
+			// Get HTML field name (remove '_attach' from signature_field)
+			let html_field = dept.signature_field.replace('_attach', '');
+			// Fetch and render signature
+			fetch_employee_signature(frm, dept.reviewer_field, html_field);
+		}
+	});
 }

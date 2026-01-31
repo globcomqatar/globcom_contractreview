@@ -1,0 +1,56 @@
+/* Contract Review Record - Signature Image Alignment
+ * Standardizes signature image dimensions across all department sections
+ * Maintains aspect ratio while ensuring consistent display
+ * Adds visible "Signature:" label above signature images
+ */
+
+/* CSS labels removed - using DocType field labels instead */
+
+/* Target all signature image fields (sign, sign_design, sign_operations, etc.) */
+[data-fieldname="sign"] img,
+[data-fieldname="sign_design"] img,
+[data-fieldname="sign_operations"] img,
+[data-fieldname="sign_quality"] img,
+[data-fieldname="sign_purchase"] img,
+[data-fieldname="sign_finance"] img,
+[data-fieldname="sign_hse"] img,
+.frappe-control[data-fieldname*="sign_"]:not([data-fieldname*="attach"]) img {
+    /* Fixed maximum dimensions for consistency */
+    max-width: 200px !important;
+    max-height: 80px !important;
+
+    /* Maintain aspect ratio - image fits within bounds without distortion */
+    object-fit: contain;
+
+    /* Center align the image */
+    display: block;
+    margin: 0 auto 0 auto;
+
+    /* Remove box styling - signature will sit on line */
+    border: none;
+    border-radius: 0;
+    padding: 8px 10px 4px 10px;
+    background-color: transparent;
+
+    /* Add signature line below the image - longer line */
+    border-bottom: 2px solid #333;
+    min-width: 280px;
+}
+
+/* Print format styling - keep signature line for printing */
+@media print {
+    [data-fieldname="sign"] img,
+    [data-fieldname="sign_design"] img,
+    [data-fieldname="sign_operations"] img,
+    [data-fieldname="sign_quality"] img,
+    [data-fieldname="sign_purchase"] img,
+    [data-fieldname="sign_finance"] img,
+    [data-fieldname="sign_hse"] img,
+    .frappe-control[data-fieldname*="sign_"]:not([data-fieldname*="attach"]) img {
+        background-color: transparent;
+        /* Keep signature line and padding for professional print appearance */
+        border-bottom: 1px solid #000;
+        padding: 8px 10px 4px 10px;
+        min-width: 280px;
+    }
+}

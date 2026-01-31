@@ -187,6 +187,7 @@
    "default": "0",
    "fieldname": "notify_all_departments",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Notify all Departments"
   },
   {
@@ -271,16 +272,13 @@
   {
    "fieldname": "sign_attach",
    "fieldtype": "Attach Image",
-   "label": "Signature Attachment",
    "hidden": 1,
+   "label": "Signature Attachment",
    "read_only": 1
   },
   {
    "fieldname": "sign",
-   "fieldtype": "Image",
-   "label": "Signature",
-   "read_only": 1,
-   "options": "sign_attach"
+   "fieldtype": "HTML"
   },
   {
    "collapsible": 1,
@@ -333,15 +331,13 @@
   {
    "fieldname": "sign_design_attach",
    "fieldtype": "Attach Image",
-   "label": "Signature Attachment",
    "hidden": 1,
+   "label": "Signature Attachment",
    "read_only": 1
   },
   {
    "fieldname": "sign_design",
-   "fieldtype": "Image",
-   "label": "Signature",
-   "options": "sign_design_attach"
+   "fieldtype": "HTML"
   },
   {
    "collapsible": 1,
@@ -394,15 +390,13 @@
   {
    "fieldname": "sign_operations_attach",
    "fieldtype": "Attach Image",
-   "label": "Signature Attachment",
    "hidden": 1,
+   "label": "Signature Attachment",
    "read_only": 1
   },
   {
    "fieldname": "sign_operations",
-   "fieldtype": "Image",
-   "label": "Signature",
-   "options": "sign_operations_attach"
+   "fieldtype": "HTML"
   },
   {
    "collapsible": 1,
@@ -455,15 +449,13 @@
   {
    "fieldname": "sign_quality_attach",
    "fieldtype": "Attach Image",
-   "label": "Signature Attachment",
    "hidden": 1,
+   "label": "Signature Attachment",
    "read_only": 1
   },
   {
    "fieldname": "sign_quality",
-   "fieldtype": "Image",
-   "label": "Signature",
-   "options": "sign_quality_attach"
+   "fieldtype": "HTML"
   },
   {
    "collapsible": 1,
@@ -516,15 +508,13 @@
   {
    "fieldname": "sign_purchase_attach",
    "fieldtype": "Attach Image",
-   "label": "Signature Attachment",
    "hidden": 1,
+   "label": "Signature Attachment",
    "read_only": 1
   },
   {
    "fieldname": "sign_purchase",
-   "fieldtype": "Image",
-   "label": "Signature",
-   "options": "sign_purchase_attach"
+   "fieldtype": "HTML"
   },
   {
    "collapsible": 1,
@@ -577,15 +567,13 @@
   {
    "fieldname": "sign_finance_attach",
    "fieldtype": "Attach Image",
-   "label": "Signature Attachment",
    "hidden": 1,
+   "label": "Signature Attachment",
    "read_only": 1
   },
   {
    "fieldname": "sign_finance",
-   "fieldtype": "Image",
-   "label": "Signature",
-   "options": "sign_finance_attach"
+   "fieldtype": "HTML"
   },
   {
    "collapsible": 1,
@@ -638,15 +626,13 @@
   {
    "fieldname": "sign_hse_attach",
    "fieldtype": "Attach Image",
-   "label": "Signature Attachment",
    "hidden": 1,
+   "label": "Signature Attachment",
    "read_only": 1
   },
   {
    "fieldname": "sign_hse",
-   "fieldtype": "Image",
-   "label": "Signature",
-   "options": "sign_hse_attach"
+   "fieldtype": "HTML"
   },
   {
    "fieldname": "connections_tab",
@@ -669,7 +655,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-29 14:40:12.111581",
+ "modified": "2026-01-31 12:25:45.169729",
  "modified_by": "Administrator",
  "module": "Globcom Contract Review",
  "name": "Contract Review Record",
@@ -690,6 +676,8 @@
    "write": 1
   },
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -697,9 +685,30 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Sales Review",
+   "role": "Sales Manager",
    "share": 1,
    "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Review",
+   "share": 1,
    "write": 1
   },
   {
