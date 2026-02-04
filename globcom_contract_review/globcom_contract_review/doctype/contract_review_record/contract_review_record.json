@@ -37,6 +37,7 @@
   "review_status",
   "sign_attach",
   "sign",
+  "custom_manual_sign",
   "section_break_oowa",
   "reviewed_by_design",
   "name_design",
@@ -47,6 +48,7 @@
   "approval_status_design",
   "sign_design_attach",
   "sign_design",
+  "custom_manual_sign_design",
   "operations_section",
   "reviewed_by_operations",
   "name_operations",
@@ -57,6 +59,7 @@
   "review_status_operations",
   "sign_operations_attach",
   "sign_operations",
+  "custom_manual_sign_operations",
   "quality_section",
   "reviewed_by_quality",
   "name_quality",
@@ -67,6 +70,7 @@
   "approval_status_quality",
   "sign_quality_attach",
   "sign_quality",
+  "custom_manual_sign_quality",
   "purchase_section",
   "reviewed_by_purchase",
   "name_purchase",
@@ -77,6 +81,7 @@
   "approval_status_purchase",
   "sign_purchase_attach",
   "sign_purchase",
+  "custom_manual_sign_purchase",
   "finance_section",
   "reviewed_by_finance",
   "name_finance",
@@ -87,6 +92,7 @@
   "approval_status_finance",
   "sign_finance_attach",
   "sign_finance",
+  "custom_manual_sign_finance",
   "hse_health_and_safety_environment_section",
   "reviewed_by_hse",
   "name_hse",
@@ -97,6 +103,7 @@
   "approval_status_hse",
   "sign_hse_attach",
   "sign_hse",
+  "custom_manual_sign_hse",
   "connections_tab"
  ],
  "fields": [
@@ -649,20 +656,63 @@
   {
    "fieldname": "due_date",
    "fieldtype": "Date",
-   "label": "Due Date"
+   "label": "Due Date",
+   "read_only_depends_on": "eval:doc.owner != frappe.session.user"
   },
   {
    "default": "0",
    "fieldname": "management_of_change",
    "fieldtype": "Check",
    "label": "Management of Change (MOC)"
+  },
+  {
+   "depends_on": "eval: !doc.sign_attach && (doc.review_status == 'Approved' || doc.review_status == 'Rejected')",
+   "fieldname": "custom_manual_sign",
+   "fieldtype": "Signature",
+   "label": "Manual Signature"
+  },
+  {
+   "depends_on": "eval: !doc.sign_design_attach && (doc.approval_status_design == 'Approved' || doc.approval_status_design == 'Rejected')",
+   "fieldname": "custom_manual_sign_design",
+   "fieldtype": "Signature",
+   "label": "Manual Signature"
+  },
+  {
+   "depends_on": "eval: !doc.sign_operations_attach && (doc.review_status_operations == 'Approved' || doc.review_status_operations == 'Rejected')",
+   "fieldname": "custom_manual_sign_operations",
+   "fieldtype": "Signature",
+   "label": "Manual Signature"
+  },
+  {
+   "depends_on": "eval: !doc.sign_quality_attach && (doc.approval_status_quality == 'Approved' || doc.approval_status_quality == 'Rejected')",
+   "fieldname": "custom_manual_sign_quality",
+   "fieldtype": "Signature",
+   "label": "Manual Signature"
+  },
+  {
+   "depends_on": "eval: !doc.sign_purchase_attach && (doc.approval_status_purchase == 'Approved' || doc.approval_status_purchase == 'Rejected')",
+   "fieldname": "custom_manual_sign_purchase",
+   "fieldtype": "Signature",
+   "label": "Manual Signature"
+  },
+  {
+   "depends_on": "eval: !doc.sign_finance_attach && (doc.approval_status_finance == 'Approved' || doc.approval_status_finance == 'Rejected')",
+   "fieldname": "custom_manual_sign_finance",
+   "fieldtype": "Signature",
+   "label": "Manual Signature"
+  },
+  {
+   "depends_on": "eval: !doc.sign_hse_attach && (doc.approval_status_hse == 'Approved' || doc.approval_status_hse == 'Rejected')",
+   "fieldname": "custom_manual_sign_hse",
+   "fieldtype": "Signature",
+   "label": "Manual Signature"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-31 12:25:45.169729",
+ "modified": "2026-02-04 17:08:04.495020",
  "modified_by": "Administrator",
  "module": "Globcom Contract Review",
  "name": "Contract Review Record",

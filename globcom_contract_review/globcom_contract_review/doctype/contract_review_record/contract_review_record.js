@@ -208,10 +208,18 @@ function fetch_employee_signature(frm, user_field, signature_field) {
 	frappe.db.get_value('Employee', {user_id: user_id}, 'custom_attach_sign_image')
 		.then(r => {
 			if (r.message && r.message.custom_attach_sign_image) {
+				// Store image URL in sign_attach field (triggers depends_on for manual signature)
+				let attach_field = signature_field + '_attach';
+				frm.set_value(attach_field, r.message.custom_attach_sign_image);
+
 				// Render signature with custom HTML (image on signature line)
 				render_signature_html(frm, signature_field, r.message.custom_attach_sign_image);
 			} else {
-				// No signature found - clear field
+				// No signature found - clear attach field (shows manual signature field)
+				let attach_field = signature_field + '_attach';
+				frm.set_value(attach_field, '');
+
+				// Clear HTML field
 				clear_signature_html(frm, signature_field);
 			}
 		});
@@ -248,6 +256,12 @@ function render_signature_html(frm, signature_field, image_url) {
 function clear_signature_html(frm, signature_field) {
 	if (frm.fields_dict[signature_field] && frm.fields_dict[signature_field].$wrapper) {
 		frm.fields_dict[signature_field].$wrapper.html('');
+	}
+
+	// Clear the attach field to trigger depends_on (show manual signature)
+	let attach_field = signature_field + '_attach';
+	if (frm.doc[attach_field]) {
+		frm.set_value(attach_field, '');
 	}
 }
 
