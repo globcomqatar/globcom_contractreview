@@ -73,7 +73,9 @@ frappe.ui.form.on('Contract Review Record', {
 		render_all_signatures(frm);
 
 		// Add "Notify All Department" button
-		if (!frm.doc.__islocal && !frm.doc.notify_all_departments) {
+		if (!frm.doc.__islocal &&
+			!frm.doc.notify_all_departments &&
+			(frm.doc.owner === frappe.session.user || frappe.user.has_role('System Manager'))) {
 			frm.add_custom_button(__('Notify All Department'), function() {
 				// Set notify_all_departments checkbox to checked
 				frm.set_value('notify_all_departments', 1);

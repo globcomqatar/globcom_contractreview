@@ -25,7 +25,7 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = "/assets/globcom_contract_review/css/contract_review_signatures.css"
+# app_include_css = "/assets/globcom_contract_review/css/contract_review_signatures.css"
 # app_include_js = "/assets/globcom_contract_review/js/globcom_contract_review.js"
 
 # include js, css files in header of web template
@@ -291,7 +291,7 @@ fixtures = [
 			["module", "=", "Globcom Contract Review"]
 		]
 	},
-    {
+	{
 		"doctype": "Notification",
 		"filters": [
 			["name", "in", ["Contract Review Record Reminder", "Contract Review Notification"]]

@@ -278,7 +278,7 @@
   },
   {
    "fieldname": "sign_attach",
-   "fieldtype": "Attach Image",
+   "fieldtype": "Data",
    "hidden": 1,
    "label": "Signature Attachment",
    "read_only": 1
@@ -338,7 +338,7 @@
   },
   {
    "fieldname": "sign_design_attach",
-   "fieldtype": "Attach Image",
+   "fieldtype": "Data",
    "hidden": 1,
    "label": "Signature Attachment",
    "read_only": 1
@@ -398,7 +398,7 @@
   },
   {
    "fieldname": "sign_operations_attach",
-   "fieldtype": "Attach Image",
+   "fieldtype": "Data",
    "hidden": 1,
    "label": "Signature Attachment",
    "read_only": 1
@@ -458,7 +458,7 @@
   },
   {
    "fieldname": "sign_quality_attach",
-   "fieldtype": "Attach Image",
+   "fieldtype": "Data",
    "hidden": 1,
    "label": "Signature Attachment",
    "read_only": 1
@@ -518,7 +518,7 @@
   },
   {
    "fieldname": "sign_purchase_attach",
-   "fieldtype": "Attach Image",
+   "fieldtype": "Data",
    "hidden": 1,
    "label": "Signature Attachment",
    "read_only": 1
@@ -578,7 +578,7 @@
   },
   {
    "fieldname": "sign_finance_attach",
-   "fieldtype": "Attach Image",
+   "fieldtype": "Data",
    "hidden": 1,
    "label": "Signature Attachment",
    "read_only": 1
@@ -638,7 +638,7 @@
   },
   {
    "fieldname": "sign_hse_attach",
-   "fieldtype": "Attach Image",
+   "fieldtype": "Data",
    "hidden": 1,
    "label": "Signature Attachment",
    "read_only": 1
