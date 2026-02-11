@@ -7,16 +7,14 @@ description = "Globcom Itag Custom Development"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
-dependencies = [
-    # "frappe~=15.0.0" # Installed and managed by bench.
-]
+dependencies = []
 
 [build-system]
 requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
-
-[tool.bench.dev-dependencies]
+# REQUIRED BY FRAPPE CLOUD
+[tool.bench.frappe-dependencies]
 frappe = ">=15.0.0"
 
 # These dependencies are only installed when developer mode is enabled
