@@ -1,9 +1,9 @@
 [project]
-name = "globcom_contract_review"
+name = "globcom_manufacturing"
 authors = [
     { name = "Globcom Qatar", email = "info@globcomqatar.com"}
 ]
-description = "Globcom Itag Custom Development"
+description = "Globcom Manufacturing Custom Development"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
@@ -15,9 +15,12 @@ dependencies = [
 requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
+[tool.bench.frappe-dependencies]
+frappe = ">=15.0.0"
+
 # These dependencies are only installed when developer mode is enabled
 [tool.bench.dev-dependencies]
-frappe = ">=15.0.0"
+# package_name = "~=1.1.0"
 
 [tool.ruff]
 line-length = 110
